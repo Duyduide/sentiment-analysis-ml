@@ -10,6 +10,8 @@ build/
 # Virtual environments
 venv/
 .env/
+.venv/
+.conda/
 
 # IDE
 .vscode/

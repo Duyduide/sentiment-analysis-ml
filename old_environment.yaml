@@ -1,0 +1,25 @@
+# Conda environment configuration for sentiment analysis project
+# Key terminal command to create the environment:
+# conda env create -f environment.yaml (use to create the environment from this file)
+# conda env update --file environment.yaml --prune
+# conda env export --name ml_assignment > environment.yaml
+# conda env remove --name ml_assignment
+# conda env list
+
+name: ml_assignment
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - scikit-learn
+  - pandas
+  - numpy
+  - matplotlib
+  - seaborn
+  - nltk
+  - spacy
+  - transformers
+  - pytorch
+  - kagglehub
