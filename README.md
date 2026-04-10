@@ -1,6 +1,6 @@
 # 🎯 Sentiment Analysis — Traditional ML vs. Modern NLP
 
-A comparative study of **Traditional Machine Learning** (TF-IDF + SVM / Naive Bayes / Logistic Regression) versus **Modern NLP** (DistilBERT embeddings + Neural Network) for sentiment classification.
+A comparative study of **Traditional Machine Learning** (TF-IDF + Logistic Regression / Naive Bayes ) versus **Modern NLP** (DistilBERT embeddings + Neural Network) for sentiment classification.
 
 > **Course:** Machine Learning — HCMUT (Semester 252)
 
@@ -8,13 +8,14 @@ A comparative study of **Traditional Machine Learning** (TF-IDF + SVM / Naive Ba
 
 ## 👥 Team Information
 
-| Name | Student ID | Role |
-|------|-----------|------|
-| Member 1 | XXXXXXX | Team Lead / ML Engineer |
-| Member 2 | XXXXXXX | Data Engineer |
-| Member 3 | XXXXXXX | NLP Engineer |
+| Name | Student ID |
+|------|-----------|
+| Nguyễn Phương Duy | 2210526 | 
+| Lê Khắc Dũng | 2210574 | 
+| Nguyễn Hà Viết Thống | 2313339 | 
+| Quách Trọng Kiên | 2211734 |
 
-**Instructor:** *[Instructor Name]*
+**Instructor:** *Ph.D Trương Vĩnh Lân*
 
 ---
 
@@ -25,15 +26,14 @@ assignment/
 ├── modules/                  # Core Python modules
 │   ├── __init__.py
 │   ├── preprocessing.py      # Text cleaning & normalization
-│   ├── features.py           # TF-IDF & DistilBERT feature extraction
+│   ├── features.py           # TF-IDF & Bag-of-word vs distilBERT feature extraction
 │   ├── models.py             # Traditional ML + PyTorch MLP
 │   └── utils.py              # Save/load features, plotting
 ├── notebooks/
 │   └── main.ipynb            # Master Colab notebook (end-to-end pipeline)
 ├── reports/                  # Generated reports & figures
 ├── features/                 # Saved feature files (.npy)
-├── requirements.txt          # Python dependencies
-└── README.md                 # This file
+└── requirements.txt &.ymal   # Python dependencies
 ```
 
 ---
@@ -73,8 +73,8 @@ Open `notebooks/main.ipynb` and execute the cells sequentially:
 ## 🧪 Methods
 
 ### Traditional ML Pipeline
-- **Features:** TF-IDF (unigram + bigram, max 5000 features)
-- **Models:** Logistic Regression, Linear SVM, Multinomial Naive Bayes
+- **Features:** TF-IDF + Bag-of-Words (BoW)
+- **Models:** Logistic Regression, Naive Bayes
 
 ### Modern NLP Pipeline
 - **Features:** DistilBERT `[CLS]` token embeddings (768-dim)

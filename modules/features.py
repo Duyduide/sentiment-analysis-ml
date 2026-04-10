@@ -68,6 +68,12 @@ class FeatureExtractor:
             return self.tfidf_vectorizer.fit_transform(corpus)
         else:
             return self.tfidf_vectorizer.transform(corpus)
+        
+    # ------------------------------------------------------------------
+    # Bag-of-Words (BoW)
+    # ------------------------------------------------------------------
+    def extract_bow(self, corpus: list[str]):
+        pass
 
     # ------------------------------------------------------------------
     # DistilBERT Embeddings
