@@ -27,7 +27,9 @@ def save_features(array: np.ndarray, path: str) -> None:
     path : str
         Destination file path (should end with ``.npy``).
     """
-    os.makedirs(os.path.dirname(path), exist_ok=True)
+    dir_path = os.path.dirname(path)
+    if dir_path:
+        os.makedirs(dir_path, exist_ok=True)
     np.save(path, array)
     print(f"[utils] Features saved → {path}  (shape: {array.shape})")
 

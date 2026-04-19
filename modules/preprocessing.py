@@ -136,6 +136,32 @@ def preprocess_pipeline(text: str, use_lemmatization: bool = True) -> str:
     return text
 
 
+# ---------------------------------------------------------------------------
+# Dataset-Specific Helpers (Amazon Reviews)
+# ---------------------------------------------------------------------------
+
+def extract_rating(text: str):
+    """Extract numeric rating from 'Rated X' style strings."""
+    match = re.search(r"Rated (\d)", str(text))
+    return int(match.group(1)) if match else None
+
+
+def convert_sentiment(rating) -> str:
+    """
+    Map a numeric rating to a sentiment label.
+
+    1–2 → negative, 3 → neutral, 4–5 → positive.
+    """
+    if rating is None:
+        return None
+    if rating <= 2:
+        return "negative"
+    elif rating == 3:
+        return "neutral"
+    else:
+        return "positive"
+
+
 def preprocess_dataframe(
     df: pd.DataFrame,
     text_col: str = "text",
