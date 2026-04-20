@@ -11,7 +11,8 @@ import seaborn as sns
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, f1_score
+from modules.utils import plot_confusion_matrix
 
 
 # ---------------------------------------------------------------------------
@@ -28,9 +29,9 @@ def get_classifiers() -> dict:
         Mapping model_name → unfitted sklearn estimator.
     """
     return {
-        "Logistic Regression": LogisticRegression(max_iter=1000),
+        "Logistic Regression": LogisticRegression(max_iter=1000, class_weight="balanced"),
         "Naive Bayes": MultinomialNB(),
-        "Decision Tree": DecisionTreeClassifier(max_depth=20),
+        "Decision Tree": DecisionTreeClassifier(max_depth=20, class_weight="balanced"),
     }
 
 
@@ -38,7 +39,7 @@ def get_classifiers() -> dict:
 # Training
 # ---------------------------------------------------------------------------
 
-def train_model(model, X_train, y_train):
+def train_model(model, X_train, y_train, sample_weight=None):
     """
     Fit a sklearn estimator and return it.
 
@@ -50,12 +51,15 @@ def train_model(model, X_train, y_train):
         Training features.
     y_train : array-like
         Training labels.
+    sample_weight : array-like, optional
+        Per-sample weights passed to ``model.fit``. Useful for models
+        that do not support ``class_weight`` (e.g. MultinomialNB).
 
     Returns
     -------
     Fitted estimator.
     """
-    model.fit(X_train, y_train)
+    model.fit(X_train, y_train, sample_weight=sample_weight)
     return model
 
 
@@ -90,26 +94,22 @@ def evaluate_model(
     """
     print(f"===== {model_name} =====")
     acc = accuracy_score(y_test, y_pred)
-    print(f"Accuracy: {acc:.4f}")
+    print(f"Accuracy:        {acc:.4f}")
+
+    macro_f1    = f1_score(y_test, y_pred, average="macro")
+    weighted_f1 = f1_score(y_test, y_pred, average="weighted")
+    print(f"Macro F1:        {macro_f1:.4f}")
+    print(f"Weighted F1:     {weighted_f1:.4f}")
 
     print("\nClassification Report:")
     print(classification_report(y_test, y_pred, target_names=labels))
 
-    cm = confusion_matrix(y_test, y_pred)
-    plt.figure(figsize=(4, 3))
-    sns.heatmap(
-        cm,
-        annot=True,
-        fmt="d",
-        cmap="Blues",
-        xticklabels=labels or "auto",
-        yticklabels=labels or "auto",
+    plot_confusion_matrix(
+        y_test,
+        y_pred,
+        labels=labels,
+        title=f"{model_name} — Confusion Matrix",
     )
-    plt.title(f"{model_name} — Confusion Matrix")
-    plt.xlabel("Predicted")
-    plt.ylabel("Actual")
-    plt.tight_layout()
-    plt.show()
 
     return acc
 
