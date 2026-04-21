@@ -43,8 +43,8 @@ assignment/
 ### 1. Clone & Install
 
 ```python
-!git clone https://github.com/<your-username>/<your-repo>.git /content/project
-%cd /content/project
+!git clone https://github.com/Duyduide/sentiment-analysis-ml.git
+%cd sentiment-analysis-ml
 !pip install -r requirements.txt
 ```
 
