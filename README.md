@@ -2,7 +2,7 @@
 
 A comparative study of **Traditional Machine Learning** (TF-IDF + Logistic Regression / Naive Bayes ) versus **Modern NLP** (DistilBERT embeddings + Neural Network) for sentiment classification.
 
-> **Course:** Machine Learning — HCMUT (Semester 252)
+> **Course:** Machine Learning CO3117 — HCMUT (Semester 252)
 
 ---
 
