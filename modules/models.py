@@ -2,7 +2,7 @@
 models.py — Model Training & Evaluation Module
 ===============================================
 Wrappers for training scikit-learn classifiers and evaluating sentiment
-analysis models (both TF-IDF-based and BERT-embedding-based).
+analysis models (TF-IDF/BoW-based and BERT-embedding-based).
 """
 
 import pandas as pd
@@ -139,10 +139,10 @@ def compare_models(results: dict, title: str = "Model Comparison") -> pd.DataFra
     )
     df = df.sort_values("Accuracy", ascending=False).reset_index(drop=True)
 
-    plt.figure(figsize=(6, 4))
+    plt.figure(figsize=(max(6, 0.9 * len(df)), 4))
     sns.barplot(x="Model", y="Accuracy", data=df)
     plt.title(title)
-    plt.xticks(rotation=30)
+    plt.xticks(rotation=30, ha="right")
     plt.ylim(0, 1)
     plt.tight_layout()
     plt.show()
