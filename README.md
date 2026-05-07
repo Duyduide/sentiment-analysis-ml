@@ -1,6 +1,6 @@
 # 🎯 Sentiment Analysis — Traditional ML vs. Modern NLP
 
-A comparative study of **Traditional Machine Learning** (TF-IDF + Logistic Regression / Naive Bayes ) versus **Modern NLP** (DistilBERT embeddings + Neural Network) for sentiment classification.
+A comparative study of **Traditional Machine Learning** (TF-IDF + Logistic Regression / Naive Bayes / Decision Tree ) versus **Modern NLP** (DistilBERT embeddings + Logistic Regression) for sentiment classification.
 
 > **Course:** Machine Learning — HCMUT (Semester 252)
 
@@ -30,7 +30,7 @@ assignment/
 │   ├── models.py             # Traditional ML + PyTorch MLP
 │   └── utils.py              # Save/load features, plotting
 ├── notebooks/
-│   └── main.ipynb            # Master Colab notebook (end-to-end pipeline)
+│   └── ML_assignment.ipynb   # Master Colab notebook (end-to-end pipeline)
 ├── reports/                  # Generated reports & figures
 ├── features/                 # Saved feature files (.npy)
 └── requirements.txt &.ymal   # Python dependencies
@@ -55,18 +55,18 @@ import os
 os.environ['KAGGLE_USERNAME'] = 'your_username'
 os.environ['KAGGLE_KEY'] = 'your_api_key'
 
-!kaggle datasets download -d kazanova/sentiment140 -p /content/data --unzip
+!kaggle datasets download -d dongrelaxman/amazon-reviews-dataset -p /content/data --unzip
 ```
 
 ### 3. Run the Pipeline
 
-Open `notebooks/main.ipynb` and execute the cells sequentially:
+Open `notebooks/ML_assignment.ipynb` and execute the cells sequentially:
 
 1. **Load & Explore** the dataset
 2. **Preprocess** text (cleaning, stopword removal, lemmatization)
 3. **Extract Features** (TF-IDF and DistilBERT embeddings)
-4. **Train Models** (Traditional ML + Simple NN)
-5. **Evaluate & Compare** results with confusion matrices and loss curves
+4. **Train Models**
+5. **Evaluate & Compare** results with confusion matrices
 
 ---
 
@@ -74,11 +74,11 @@ Open `notebooks/main.ipynb` and execute the cells sequentially:
 
 ### Traditional ML Pipeline
 - **Features:** TF-IDF + Bag-of-Words (BoW)
-- **Models:** Logistic Regression, Naive Bayes
+- **Models:** Logistic Regression, Naive Bayes. Decision Tree
 
 ### Modern NLP Pipeline
 - **Features:** DistilBERT `[CLS]` token embeddings (768-dim)
-- **Model:** 2-layer MLP (PyTorch) with dropout
+- **Model:** Logistic Regression
 
 ---
 
@@ -88,7 +88,6 @@ Open `notebooks/main.ipynb` and execute the cells sequentially:
 |---------|---------|
 | `scikit-learn` | Traditional ML models & TF-IDF |
 | `transformers` | DistilBERT tokenizer & model |
-| `torch` | Neural network training |
 | `nltk` | Text preprocessing |
 | `matplotlib` / `seaborn` | Visualization |
 | `kaggle` | Dataset download API |
@@ -101,7 +100,6 @@ See [`requirements.txt`](requirements.txt) for the full list.
 
 - Accuracy comparison table across all models
 - Confusion matrices for each model
-- Training / validation loss curves for the neural network
 - Saved features in `features/` directory (`.npy` format)
 
 ---
